@@ -1,0 +1,6 @@
+pytest
+pytest-cov
+moto[s3]
+boto3
+bandit
+regex
