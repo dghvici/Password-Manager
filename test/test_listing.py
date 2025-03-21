@@ -4,6 +4,7 @@ import boto3
 import os
 import pytest
 
+
 @pytest.fixture(scope="function", autouse=True)
 def aws_credentials():
     """Mocked AWS Credentials for moto."""
@@ -14,19 +15,19 @@ def aws_credentials():
     os.environ["AWS_SESSION_TOKEN"] = "test"
     os.environ["AWS_DEFAULT_REGION"] = "eu-west-2"
 
-@pytest.mark.skip
-class TestListing(): 
+
+# @pytest.mark.skip
+class TestListing:
 
     def test_listing_return_message_when_no_secrets(self, aws_credentials):
         with mock_aws():
-            secret_client = boto3.client('secretsmanager')
+            secret_client = boto3.client("secretsmanager")
             response = listing(secret_client)
-            assert response == 'You have no secrets.'
-
+            assert response == "You have no secrets."
 
     def test_listing_return_a_list_of_secrets(self, aws_credentials):
         with mock_aws():
-            secret_client = boto3.client('secretsmanager')
-            secret = secret_client.create_secret(Name='test_secret')
+            secret_client = boto3.client("secretsmanager")
+            secret = secret_client.create_secret(Name="test_secret")
             response = listing(secret_client)
-            assert response == ['test_secret']
+            assert response == ["test_secret"]

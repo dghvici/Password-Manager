@@ -1,0 +1,6 @@
+venv
+**/.pycache
+**/__pycache__
+.pytest_cache
+src/warm-up.py
+.coverage
